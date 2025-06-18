@@ -35,6 +35,7 @@ namespace Vigilante.Models
         [DisplayName("File Extension")]
         public string FileContentType { get; set; }
 
+
         //Navigation Properties
         public virtual Ticket Ticket { get; set; }
 

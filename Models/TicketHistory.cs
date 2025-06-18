@@ -31,6 +31,7 @@ namespace Vigilante.Models
         [DisplayName("Team Member")]
         public string UserId { get; set; }
 
+
         //Navigation Properties 
         //Create relationships
         public virtual Ticket Ticket { get; set; }
