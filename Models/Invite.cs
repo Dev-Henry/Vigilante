@@ -52,11 +52,11 @@ namespace Vigilante.Models
         //navigation properties
         public virtual  Company Company { get; set; }
 
-        public virtual Company Invitor { get; set; }
+        public virtual VGUser Invitor { get; set; }
 
-        public virtual Company Invitee { get; set; }
+        public virtual VGUser Invitee { get; set; }
 
-        public virtual Company Project { get; set; }
+        public virtual Project Project { get; set; }
 
     }
 }

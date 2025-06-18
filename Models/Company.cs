@@ -4,6 +4,7 @@ namespace Vigilante.Models
 {
     public class Company
     {
+        //primary key
         public int Id { get; set; }
 
         [DisplayName("Company Name")]
