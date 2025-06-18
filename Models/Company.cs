@@ -18,5 +18,8 @@ namespace Vigilante.Models
         public virtual ICollection<VGUser> Members { get; set; }
 
         public virtual  ICollection<Project> Projects { get; set; }
+
+        //create a relationship to the Invite table
+
     }
 }
