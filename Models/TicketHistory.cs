@@ -3,9 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Net.Sockets;
 
 namespace Vigilante.Models
-{
+{   
     public class TicketHistory
     {
+        //this model is different because it will be updated dynamically unlike 
+        //ticket type, status and proirity which will be seeded properties
         public int Id { get; set; }
 
         [DisplayName("Ticket")]
@@ -37,3 +39,5 @@ namespace Vigilante.Models
 
     }
 }
+
+
