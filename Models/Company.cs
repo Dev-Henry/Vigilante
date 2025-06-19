@@ -21,6 +21,6 @@ namespace Vigilante.Models
         public virtual  ICollection<Project> Projects { get; set; }
 
         //create a relationship to the Invite table
-
+        public virtual ICollection<Invite> Invites { get; set; }
     }
 }

@@ -19,6 +19,8 @@ builder.Services.AddIdentity<VGUser, IdentityRole>(options => options.SignIn.Req
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IVGRolesService, VGRolesService>();
+builder.Services.AddScoped<IVGCompanyInfoService, VGCompanyInfoService>();
+
 builder.Services.AddControllersWithViews();
 
 
