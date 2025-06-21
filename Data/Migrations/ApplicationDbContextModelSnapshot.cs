@@ -330,11 +330,7 @@ namespace Vigilante.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("ProjectPriorityId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ProjectPriorityid")
+                    b.Property<int?>("ProjectPriorityId")
                         .HasColumnType("integer");
 
                     b.Property<DateTimeOffset>("StartDate")
@@ -344,24 +340,24 @@ namespace Vigilante.Data.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("ProjectPriorityid");
+                    b.HasIndex("ProjectPriorityId");
 
                     b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Vigilante.Models.ProjectPriority", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ProjectPriorities");
                 });
@@ -606,15 +602,12 @@ namespace Vigilante.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("AvatarContentType")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("AvatarFileData")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<string>("AvatarFileName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("CompanyId")
@@ -755,7 +748,7 @@ namespace Vigilante.Data.Migrations
             modelBuilder.Entity("Vigilante.Models.Invite", b =>
                 {
                     b.HasOne("Vigilante.Models.Company", "Company")
-                        .WithMany()
+                        .WithMany("Invites")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -824,9 +817,7 @@ namespace Vigilante.Data.Migrations
 
                     b.HasOne("Vigilante.Models.ProjectPriority", "ProjectPriority")
                         .WithMany()
-                        .HasForeignKey("ProjectPriorityid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectPriorityId");
 
                     b.Navigation("Company");
 
@@ -952,6 +943,8 @@ namespace Vigilante.Data.Migrations
 
             modelBuilder.Entity("Vigilante.Models.Company", b =>
                 {
+                    b.Navigation("Invites");
+
                     b.Navigation("Members");
 
                     b.Navigation("Projects");

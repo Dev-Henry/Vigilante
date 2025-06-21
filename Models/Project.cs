@@ -29,7 +29,7 @@ namespace Vigilante.Models
         public DateTimeOffset EndDate { get; set; }
 
         [DisplayName("Priority")]
-        public string ProjectPriorityId { get; set; }
+        public int? ProjectPriorityId { get; set; }
 
         //attachment properties
         [NotMapped]

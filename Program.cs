@@ -20,6 +20,9 @@ builder.Services.AddIdentity<VGUser, IdentityRole>(options => options.SignIn.Req
 
 builder.Services.AddScoped<IVGRolesService, VGRolesService>();
 builder.Services.AddScoped<IVGCompanyInfoService, VGCompanyInfoService>();
+builder.Services.AddScoped<IVGProjectService, VGProjectService>();
+builder.Services.AddScoped<IVGTicketService, VGTicketService>();
+
 
 builder.Services.AddControllersWithViews();
 

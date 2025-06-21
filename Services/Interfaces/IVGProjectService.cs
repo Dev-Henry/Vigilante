@@ -22,7 +22,7 @@ namespace Vigilante.Services.Interfaces
 
         public Task<List<VGUser>> GetDevelopersOnProjectAsync(int projectId);
 
-        public Task<List<VGUser>> GetProjectManagerAsync(int projectId);
+        public Task<VGUser> GetProjectManagerAsync(int projectId);
 
         public Task<List<VGUser>> GetProjectMembersByRoleAsync(int projectId, string roleName); 
 
@@ -34,7 +34,7 @@ namespace Vigilante.Services.Interfaces
 
         public Task<List<Project>> GetUserProjectAsync(string userId);
 
-        public Task<bool> IsUserOnProject(string userId, int projectId);
+        public Task<bool> IsUserOnProjectAsync(string userId, int projectId);
 
         public Task<int> LookUpProjectPriorityId(string priorityName);
 

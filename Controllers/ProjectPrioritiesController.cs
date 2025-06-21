@@ -34,7 +34,7 @@ namespace Vigilante.Controllers
             }
 
             var projectPriority = await _context.ProjectPriorities
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id ==id);
             if (projectPriority == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Vigilante.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,Name")] ProjectPriority projectPriority)
         {
-            if (id != projectPriority.id)
+            if (id != projectPriority.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Vigilante.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectPriorityExists(projectPriority.id))
+                    if (!ProjectPriorityExists(projectPriority.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Vigilante.Controllers
             }
 
             var projectPriority = await _context.ProjectPriorities
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (projectPriority == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Vigilante.Controllers
 
         private bool ProjectPriorityExists(int id)
         {
-            return _context.ProjectPriorities.Any(e => e.id == id);
+            return _context.ProjectPriorities.Any(e => e.Id == id);
         }
     }
 }
