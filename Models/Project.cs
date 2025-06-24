@@ -17,10 +17,15 @@ namespace Vigilante.Models
         [Required]
         [StringLength(50)]
         [DisplayName("Project Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DisplayName("Description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
+
+        [Required]
+        [Display(Name = "Created Date")]
+        [DataType(DataType.Date)]
+        public DateTimeOffset CreatedDate { get; set; }
 
         [DisplayName("Start Date")]
         public DateTimeOffset StartDate { get; set; }
@@ -34,23 +39,23 @@ namespace Vigilante.Models
         //attachment properties
         [NotMapped]
         [DataType(DataType.Upload)]
-        public IFormFile ImageFormFile { get; set; }
+        public IFormFile? ImageFormFile { get; set; }
 
         [DisplayName("File Name")]
-        public string ImageFileName { get; set; }
+        public string? ImageFileName { get; set; }
 
-        public byte[] ImageFileData { get; set; }
+        public byte[]? ImageFileData { get; set; }
 
         [DisplayName("File Extension")]
-        public string ImageContentType { get; set; }
+        public string? ImageContentType { get; set; }
 
         [DisplayName("Archived")]
         public bool Archived { get; set; }
 
         //Navigation Properties
-        public virtual Company Company { get; set; }
+        public virtual Company? Company { get; set; }
 
-        public virtual  ProjectPriority ProjectPriority { get; set; }
+        public virtual ProjectPriority? ProjectPriority { get; set; }
 
         public virtual ICollection<VGUser> Members { get; set; } = new HashSet<VGUser>();
 

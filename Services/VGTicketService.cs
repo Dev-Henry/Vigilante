@@ -1,27 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Vigilante.Data;
 using Vigilante.Models;
-using Vigilante.Models.ENUMs;
 using Vigilante.Services.Interfaces;
+using Vigilante.Models.ENUMs;
 
 namespace Vigilante.Services
 {
-
-    //inheritance 
     public class VGTicketService : IVGTicketService
     {
-        //dependency injection
         private readonly ApplicationDbContext _context;
         private readonly IVGRolesService _rolesService;
         private readonly IVGProjectService _projectService;
 
+        //constructor
         public VGTicketService(ApplicationDbContext context,
                                IVGRolesService rolesService,
                                IVGProjectService projectService)
         {
             _context = context;
-            _rolesService = rolesService;
+            _rolesService = rolesService;   
             _projectService = projectService;
         }
 
@@ -37,7 +35,6 @@ namespace Vigilante.Services
 
                 throw;
             }
-            
         }
 
         public async Task ArchiveTicketAsync(Ticket ticket)
@@ -53,22 +50,19 @@ namespace Vigilante.Services
 
                 throw;
             }
-            
         }
 
-        public async Task AssignTicketAsync(int tickedId, string userId)
+        public async Task AssignTicketAsync(int ticketId, string userId)
         {
-           Ticket ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.Id == tickedId);
-
+            Ticket ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
             try
             {
-                if(ticket != null)
+                if (ticket != null)
                 {
                     try
                     {
                         ticket.DeveloperUserId = userId;
 
-                        //revisit this code when assigning tickets 
                         ticket.TicketStatusId = (await LookupTicketStatusIdAsync("Development")).Value;
                         await _context.SaveChangesAsync();
                     }
@@ -86,13 +80,15 @@ namespace Vigilante.Services
             }
         }
 
+
+
         public async Task<List<Ticket>> GetAllTicketsByCompanyAsync(int companyId)
         {
             try
             {
                 List<Ticket> tickets = await _context.Projects
                                                      .Where(p => p.CompanyId == companyId)
-                                                     .SelectMany(p => p.Tickets)
+                                                     .SelectMany(p => p.Tickets!)
                                                         .Include(t => t.Attachments)
                                                         .Include(t => t.Comments)
                                                         .Include(t => t.DeveloperUser)
@@ -102,34 +98,38 @@ namespace Vigilante.Services
                                                         .Include(t => t.TicketStatus)
                                                         .Include(t => t.TicketType)
                                                         .Include(t => t.Project)
-                                                        .ToListAsync();
+                                                     .ToListAsync();
+
                 return tickets;
+
             }
             catch (Exception)
             {
 
                 throw;
             }
+
         }
 
         public async Task<List<Ticket>> GetAllTicketsByPriorityAsync(int companyId, string priorityName)
         {
             int priorityId = (await LookupTicketPriorityIdAsync(priorityName)).Value;
+
             try
             {
                 List<Ticket> tickets = await _context.Projects
                                                      .Where(p => p.CompanyId == companyId)
-                                                     .SelectMany (p => p.Tickets)
-                                                        .Include(t => t.Attachments)
-                                                        .Include(t => t.Comments)
-                                                        .Include(t => t.DeveloperUser)
-                                                        .Include(t => t.OwnerUser)
-                                                        .Include(t => t.TicketPriority)
-                                                        .Include(t => t.TicketStatus)
-                                                        .Include(t => t.TicketType)
-                                                        .Include(t => t.Project)
-                                                        .Where(t => t.TicketPriorityId == priorityId)
-                                                        .ToListAsync();
+                                                     .SelectMany(p => p.Tickets)
+                                                         .Include(t => t.Attachments)
+                                                         .Include(t => t.Comments)
+                                                         .Include(t => t.DeveloperUser)
+                                                         .Include(t => t.OwnerUser)
+                                                         .Include(t => t.TicketPriority)
+                                                         .Include(t => t.TicketStatus)
+                                                         .Include(t => t.TicketType)
+                                                         .Include(t => t.Project)
+                                                     .Where(t => t.TicketPriorityId == priorityId)
+                                                     .ToListAsync();
                 return tickets;
             }
             catch (Exception)
@@ -147,19 +147,18 @@ namespace Vigilante.Services
             {
                 List<Ticket> tickets = await _context.Projects
                                                      .Where(p => p.CompanyId == companyId)
-                                                     .SelectMany(p => p.Tickets)
-                                                        .Include(t => t.Attachments)
-                                                        .Include(t => t.Comments)
-                                                        .Include(t => t.DeveloperUser)
-                                                        .Include(t => t.OwnerUser)
-                                                        .Include(t => t.TicketPriority)
-                                                        .Include(t => t.TicketStatus)
-                                                        .Include(t => t.TicketType)
-                                                        .Include(t => t.Project)
-                                                        .Where(t => t.TicketStatusId == statusId)
-                                                        .ToListAsync();
+                                                     .SelectMany(p => p.Tickets!)
+                                                         .Include(t => t.Attachments)
+                                                         .Include(t => t.Comments)
+                                                         .Include(t => t.DeveloperUser)
+                                                         .Include(t => t.OwnerUser)
+                                                         .Include(t => t.TicketPriority)
+                                                         .Include(t => t.TicketStatus)
+                                                         .Include(t => t.TicketType)
+                                                         .Include(t => t.Project)
+                                                     .Where(t => t.TicketStatusId == statusId)
+                                                     .ToListAsync();
                 return tickets;
-                
             }
             catch (Exception)
             {
@@ -170,23 +169,23 @@ namespace Vigilante.Services
 
         public async Task<List<Ticket>> GetAllTicketsByTypeAsync(int companyId, string typeName)
         {
-            int typeId = (await LookupTicketTypeIdAsync(typeName)).Value;
+            int typeId = (await LookupTicketStatusIdAsync(typeName)).Value;
 
             try
             {
                 List<Ticket> tickets = await _context.Projects
                                                      .Where(p => p.CompanyId == companyId)
-                                                     .SelectMany(p => p.Tickets)
-                                                        .Include(t => t.Attachments)
-                                                        .Include(t => t.Comments)
-                                                        .Include(t => t.DeveloperUser)
-                                                        .Include(t => t.OwnerUser)
-                                                        .Include(t => t.TicketPriority)
-                                                        .Include(t => t.TicketStatus)
-                                                        .Include(t => t.TicketType)
-                                                        .Include(t => t.Project)
-                                                        .Where(t => t.TicketTypeId == typeId)
-                                                        .ToListAsync();
+                                                     .SelectMany(p => p.Tickets!)
+                                                         .Include(t => t.Attachments)
+                                                         .Include(t => t.Comments)
+                                                         .Include(t => t.DeveloperUser)
+                                                         .Include(t => t.OwnerUser)
+                                                         .Include(t => t.TicketPriority)
+                                                         .Include(t => t.TicketStatus)
+                                                         .Include(t => t.TicketType)
+                                                         .Include(t => t.Project)
+                                                     .Where(t => t.TicketTypeId == typeId)
+                                                     .ToListAsync();
                 return tickets;
             }
             catch (Exception)
@@ -196,7 +195,9 @@ namespace Vigilante.Services
             }
         }
 
-        public async Task<List<Ticket>> GetArchivedTicketAsync(int companyId)
+
+
+        public async Task<List<Ticket>> GetArchivedTicketsAsync(int companyId)
         {
             try
             {
@@ -209,6 +210,8 @@ namespace Vigilante.Services
                 throw;
             }
         }
+
+
 
         public async Task<List<Ticket>> GetProjectTicketsByPriorityAsync(string priorityName, int companyId, int projectId)
         {
@@ -232,7 +235,7 @@ namespace Vigilante.Services
 
             try
             {
-                tickets = (await GetTicketsByRoleAsync(role,userId,companyId)).Where(t => t.ProjectId == projectId).ToList();
+                tickets = (await GetTicketsByRoleAsync(role, userId, companyId)).Where(t => t.ProjectId == projectId).ToList();
                 return tickets;
             }
             catch (Exception)
@@ -276,16 +279,7 @@ namespace Vigilante.Services
 
         public async Task<Ticket> GetTicketByIdAsync(int ticketId)
         {
-            try
-            {
-                return await _context.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return await _context.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
         }
 
         public async Task<VGUser> GetTicketDeveloperAsync(int ticketId, int companyId)
@@ -296,10 +290,11 @@ namespace Vigilante.Services
             {
                 Ticket ticket = (await GetAllTicketsByCompanyAsync(companyId)).FirstOrDefault(t => t.Id == ticketId);
 
-                if(ticket?.DeveloperUserId != null)
+                if (ticket?.DeveloperUserId != null)
                 {
                     developer = ticket.DeveloperUser;
                 }
+
                 return developer;
             }
             catch (Exception)
@@ -315,9 +310,8 @@ namespace Vigilante.Services
 
             try
             {
-                if(role == Roles.Admin.ToString())
+                if (role == Roles.Admin.ToString())
                 {
-                    //god mode admin - ruler of the data
                     tickets = await GetAllTicketsByCompanyAsync(companyId);
                 }
                 else if (role == Roles.SeniorManager.ToString())
@@ -328,7 +322,7 @@ namespace Vigilante.Services
                 {
                     tickets = (await GetAllTicketsByCompanyAsync(companyId)).Where(t => t.OwnerUserId == userId).ToList();
                 }
-                else  if (role == Roles.ProjectManager.ToString())
+                else if (role == Roles.ProjectManager.ToString())
                 {
                     tickets = await GetTicketsByUserIdAsync(userId, companyId);
                 }
@@ -351,22 +345,31 @@ namespace Vigilante.Services
             {
                 if (await _rolesService.IsUserInRoleAsync(vgUser, Roles.Admin.ToString()))
                 {
-                     tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(p => p.Tickets).ToList();
+                    tickets = (await _projectService.GetAllProjectsByCompany(companyId))
+                                                    .SelectMany(p => p.Tickets).ToList();
                 }
                 else if (await _rolesService.IsUserInRoleAsync(vgUser, Roles.SeniorManager.ToString()))
                 {
                     tickets = (await _projectService.GetAllProjectsByCompany(companyId))
-                                                    .SelectMany(p => p.Tickets).Where(t => t.DeveloperUserId == userId).ToList();
+                                                    .SelectMany(t => t.Tickets)
+                                                    .Where(t => t.DeveloperUserId == userId || t.OwnerUserId == userId).ToList();
                 }
-                else if (await _rolesService.IsUserInRoleAsync(vgUser, Roles.Collaborators.ToString()))
+                else if (await _rolesService.IsUserInRoleAsync(vgUser!, nameof(Roles.Collaborators)))
                 {
                     tickets = (await _projectService.GetAllProjectsByCompany(companyId))
-                                                    .SelectMany(p => p.Tickets).Where(t => t.OwnerUserId == userId).ToList();
+                                                    .SelectMany(t => t.Tickets).Where(t => t.OwnerUserId == userId).ToList();
                 }
-                else if (await _rolesService.IsUserInRoleAsync(vgUser, Roles.ProjectManager.ToString()))
+                else if (await _rolesService.IsUserInRoleAsync(vgUser!, nameof(Roles.ProjectManager)))
+
                 {
-                    tickets = (await _projectService.GetUserProjectAsync(userId)).SelectMany(t => t.Tickets).ToList();
+                    List<Ticket> projectTickets = (await _projectService.GetUserProjectsAsync(userId)).SelectMany(t => t.Tickets!).ToList();
+                    List<Ticket> submittedTickets = (await _projectService.GetAllProjectsByCompany(companyId))
+                                                                          .SelectMany(p => p.Tickets!)
+                                                                          .Where(t => t.OwnerUserId != userId).ToList();
+                    tickets = projectTickets.Concat(submittedTickets).ToList();
+
                 }
+
                 return tickets;
             }
             catch (Exception)
@@ -383,7 +386,6 @@ namespace Vigilante.Services
                 TicketPriority priority = await _context.TicketPriorities.FirstOrDefaultAsync(p => p.Name == priorityName);
                 return priority?.Id;
             }
-            //empty catch
             catch (Exception)
             {
                 throw;
@@ -397,7 +399,6 @@ namespace Vigilante.Services
                 TicketStatus status = await _context.TicketStatuses.FirstOrDefaultAsync(p => p.Name == statusName);
                 return status?.Id;
             }
-            //empty catch
             catch (Exception)
             {
                 throw;
@@ -411,7 +412,6 @@ namespace Vigilante.Services
                 TicketType type = await _context.TicketTypes.FirstOrDefaultAsync(p => p.Name == typeName);
                 return type?.Id;
             }
-            //empty catch
             catch (Exception)
             {
                 throw;
@@ -424,16 +424,19 @@ namespace Vigilante.Services
             {
                 _context.Update(ticket);
                 await _context.SaveChangesAsync();
+
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
+        }
+
+        Task<VGUser> IVGTicketService.GetTicketDeveloperAsync(int ticketId, int companyId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
 
-//1. do the crud methods 
-//CTRL M+O, CTRL M+L

@@ -32,7 +32,7 @@ namespace Vigilante.Services.Interfaces
 
         public Task<List<VGUser>> GetUsersNotOnProjectAsync (int projectId, int companyId);
 
-        public Task<List<Project>> GetUserProjectAsync(string userId);
+        public Task<List<Project>> GetUserProjectsAsync(string userId);
 
         public Task<bool> IsUserOnProjectAsync(string userId, int projectId);
 

@@ -12,12 +12,13 @@ namespace Vigilante.Models
         [Required]
         [StringLength(50)]
         [DisplayName("Title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required]
         [DisplayName("Description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
         [DisplayName("Date Created")]
         public DateTimeOffset Created { get; set; }
@@ -46,25 +47,25 @@ namespace Vigilante.Models
 
         //these are not int because they are our identity users 
         [DisplayName("Ticket Owner")]
-        public string OwnerUserId { get; set; }
+        public string? OwnerUserId { get; set; }
 
         [DisplayName("Ticket Developer")]
-        public string DeveloperUserId { get; set; }
+        public string?   DeveloperUserId { get; set; }
 
 
         //Navigation Properties
 
         //foreign keys with IDs
-        public virtual Project Project { get; set; }
-        public virtual TicketType TicketType { get; set; }
+        public virtual Project? Project { get; set; }
+        public virtual TicketType? TicketType { get; set; }
 
-        public virtual TicketPriority TicketPriority { get; set; }
+        public virtual TicketPriority? TicketPriority { get; set; }
 
-        public virtual TicketStatus TicketStatus { get; set; }
+        public virtual TicketStatus? TicketStatus { get; set; }
 
-        public virtual VGUser OwnerUser { get; set; }
+        public virtual VGUser? OwnerUser { get; set; }
 
-        public virtual VGUser DeveloperUser { get; set; }
+        public virtual VGUser? DeveloperUser { get; set; }
 
 
         //multi relationships

@@ -12,8 +12,8 @@ using Vigilante.Data;
 namespace Vigilante.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250620165130_Initial_001")]
-    partial class Initial_001
+    [Migration("20250623104938_Init_002")]
+    partial class Init_002
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -263,8 +263,9 @@ namespace Vigilante.Data.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Message")
-                        .HasColumnType("integer");
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("RecipientId")
                         .IsRequired()
@@ -295,6 +296,23 @@ namespace Vigilante.Data.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("Vigilante.Models.NotificationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NotificationTypes");
+                });
+
             modelBuilder.Entity("Vigilante.Models.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -309,23 +327,22 @@ namespace Vigilante.Data.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ImageContentType")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("ImageFileData")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<string>("ImageFileName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -384,11 +401,9 @@ namespace Vigilante.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("DeveloperUserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("OwnerUserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ProjectId")
@@ -831,15 +846,11 @@ namespace Vigilante.Data.Migrations
                 {
                     b.HasOne("Vigilante.Models.VGUser", "DeveloperUser")
                         .WithMany()
-                        .HasForeignKey("DeveloperUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeveloperUserId");
 
                     b.HasOne("Vigilante.Models.VGUser", "OwnerUser")
                         .WithMany()
-                        .HasForeignKey("OwnerUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerUserId");
 
                     b.HasOne("Vigilante.Models.Project", "Project")
                         .WithMany("Tickets")

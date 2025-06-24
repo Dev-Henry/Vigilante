@@ -13,11 +13,11 @@ namespace Vigilante.Models
 
         [Required]
         [DisplayName("Title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required]
         [DisplayName("Title")]
-        public int Message { get; set; }
+        public string? Message { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Date Created")]
@@ -25,11 +25,11 @@ namespace Vigilante.Models
 
         [Required]
         [DisplayName("Recipient")]
-        public string RecipientId { get; set; }
+        public string? RecipientId { get; set; }
 
         [Required]
         [DisplayName("Sender")]
-        public string SenderId { get; set; }
+        public string? SenderId { get; set; }
 
         [DisplayName("Has been viewed")] 
         public bool Viewed { get; set; }
@@ -37,10 +37,10 @@ namespace Vigilante.Models
 
         //Navigation Properties
         //relationship to ticket and VGUser
-        public virtual Ticket Ticket { get; set; }
+        public virtual Ticket? Ticket { get; set; }
 
-        public virtual VGUser Recipient { get; set; }
+        public virtual VGUser? Recipient { get; set; }
 
-        public virtual VGUser Sender { get; set; }
+        public virtual VGUser? Sender { get; set; }
     }
 }

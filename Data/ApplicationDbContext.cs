@@ -21,6 +21,9 @@ namespace Vigilante.Data
 
         public DbSet<Notification> Notifications { get; set; }
 
+        public DbSet<NotificationType> NotificationTypes { get; set; }
+
+
         public DbSet<ProjectPriority> ProjectPriorities { get; set; }
 
         public DbSet<TicketAttachment> TicketAttachments { get; set; }

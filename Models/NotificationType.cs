@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Vigilante.Models
 {
-    public class TicketType
+    public class NotificationType
     {
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Type Name")]
+        [Display(Name = "Notification Type")]
         public string? Name { get; set; }
     }
 }
+

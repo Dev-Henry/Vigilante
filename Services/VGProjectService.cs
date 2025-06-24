@@ -227,7 +227,7 @@ namespace Vigilante.Services
             throw new NotImplementedException();
         }
 
-        public async Task<List<Project>> GetUserProjectAsync(string userId)
+        public async Task<List<Project>> GetUserProjectsAsync(string userId)
         {
             try
             {
