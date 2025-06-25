@@ -57,6 +57,7 @@ namespace Vigilante.Models
 
         public virtual ProjectPriority? ProjectPriority { get; set; }
 
+        //grouping members of the company
         public virtual ICollection<VGUser> Members { get; set; } = new HashSet<VGUser>();
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();

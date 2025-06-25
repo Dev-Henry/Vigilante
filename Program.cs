@@ -32,6 +32,7 @@ builder.Services.AddIdentity<VGUser, IdentityRole>(options => options.SignIn.Req
     builder.Services.AddScoped<IVGNotificationService, VGNotificationService>();
     builder.Services.AddScoped<IVGInviteService, VGInviteService>();
     builder.Services.AddScoped<IVGFileService, VGFileService>();
+builder.Services.AddScoped<IVGLookUpService, VGLookUpService>();
     builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 //default  
