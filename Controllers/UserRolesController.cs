@@ -19,6 +19,7 @@ namespace Vigilante.Controllers
             _companyInfoService = companyInfoService;
         }
 
+        [HttpGet]
         public async Task <IActionResult> ManageUserRoles()
         {
             //add an instance of the ViewModel as a list (model)
