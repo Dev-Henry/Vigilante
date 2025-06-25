@@ -26,7 +26,7 @@ namespace Vigilante.Models
         public DateTimeOffset Created { get; set; }
 
         [DisplayName("Description of Changes Made")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [DisplayName("Team Member")]
         public string UserId { get; set; }
@@ -34,9 +34,9 @@ namespace Vigilante.Models
 
         //Navigation Properties 
         //Create relationships
-        public virtual Ticket Ticket { get; set; }
+        public virtual Ticket? Ticket { get; set; }
 
-        public virtual VGUser User { get; set; }
+        public virtual VGUser? User { get; set; }
 
     }
 }

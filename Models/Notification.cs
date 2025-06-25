@@ -37,6 +37,8 @@ namespace Vigilante.Models
 
         //Navigation Properties
         //relationship to ticket and VGUser
+        public virtual NotificationType? NotificationType { get; set; }
+
         public virtual Ticket? Ticket { get; set; }
 
         public virtual VGUser? Recipient { get; set; }

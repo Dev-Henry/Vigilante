@@ -41,7 +41,6 @@ namespace Vigilante.Data
                 Password = userInfo[1],
                 Database = databaseUri.LocalPath.TrimStart('/'),
                 SslMode = SslMode.Prefer,
-                TrustServerCertificate = true
             };
             return builder.ToString();
         }
@@ -160,8 +159,8 @@ namespace Vigilante.Data
                          CompanyId = company1Id,
                          Name = "Build a Personal Porfolio",
                          Description="Single page html, css & javascript page.  Serves as a landing page for candidates and contains a bio and links to all applications and challenges." ,
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(1),
+                         StartDate = new DateTime(2025,8,20),
+                         EndDate = new DateTime(2025,8,20).AddMonths(1),
                          ProjectPriorityId = priorityLow
                      },
                      new Project()
@@ -169,8 +168,8 @@ namespace Vigilante.Data
                          CompanyId = company2Id,
                          Name = "Build a supplemental Blog Web Application",
                          Description="Candidate's custom built web application using .Net Core with MVC, a postgres database and hosted in a heroku container.  The app is designed for the candidate to create, update and maintain a live blog site.",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(4),
+                         StartDate = new DateTime(2025,8,20),
+                         EndDate = new DateTime(2025,8,20).AddMonths(4),
                          ProjectPriorityId = priorityMedium
                      },
                      new Project()
@@ -178,8 +177,8 @@ namespace Vigilante.Data
                          CompanyId = company1Id,
                          Name = "Build an Issue Tracking Web Application",
                          Description="A custom designed .Net Core application with postgres database.  The application is a multi tennent application designed to track issue tickets' progress.  Implemented with identity and user roles, Tickets are maintained in projects which are maintained by users in the role of projectmanager.  Each project has a team and team members.",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(6),
+                         StartDate = new DateTime(2025,8,20),
+                         EndDate = new DateTime(2025,8,20).AddMonths(6),
                          ProjectPriorityId = priorityHigh
                      },
                      new Project()
@@ -187,8 +186,8 @@ namespace Vigilante.Data
                          CompanyId = company2Id,
                          Name = "Build an Address Book Web Application",
                          Description="A custom designed .Net Core application with postgres database.  This is an application to serve as a rolodex of contacts for a given user..",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(2),
+                         StartDate = new DateTime(2025,8,20),
+                         EndDate = new DateTime(2025,8,20).AddMonths(2),
                          ProjectPriorityId = priorityLow
                      },
                     new Project()
@@ -196,8 +195,8 @@ namespace Vigilante.Data
                          CompanyId = company1Id,
                          Name = "Build a Movie Information Web Application",
                          Description="A custom designed .Net Core application with postgres database.  An API based application allows users to input and import movie posters and details including cast and crew information.",
-                         StartDate = new DateTime(2021,8,20),
-                         EndDate = new DateTime(2021,8,20).AddMonths(3),
+                         StartDate = new DateTime(2025,8,20),
+                         EndDate = new DateTime(2025,8,20).AddMonths(3),
                          ProjectPriorityId = priorityHigh
                      }
                 };
@@ -932,5 +931,4 @@ namespace Vigilante.Data
         }
 
     }
-    //view rawBTDataUtility.cs hosted with ❤ by GitHub
 }

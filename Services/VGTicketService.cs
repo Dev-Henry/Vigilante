@@ -87,6 +87,7 @@ namespace Vigilante.Services
             try
             {
                 List<Ticket> tickets = await _context.Projects
+                                                     //this slows down processing so use split queries to optimize it 
                                                      .Where(p => p.CompanyId == companyId)
                                                      .SelectMany(p => p.Tickets!)
                                                         .Include(t => t.Attachments)

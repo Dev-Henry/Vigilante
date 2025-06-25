@@ -6,7 +6,7 @@ namespace Vigilante.Models
     {
         public int Id { get; set; }
 
-        [DisplayName("Status Name")]
+        [DisplayName("Ticket Status")]
         public string Name { get; set; }
     }
 }
