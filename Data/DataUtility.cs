@@ -222,8 +222,8 @@ namespace Vigilante.Data
             //Seed Default Admin User
             var defaultUser = new VGUser
             {
-                UserName = "btadmin1@bugtracker.com",
-                Email = "btadmin1@bugtracker.com",
+                UserName = "vgadmin1@vigilante.com",
+                Email = "vgadmin1@vigilante.com",
                 FirstName = "Bill",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -250,8 +250,8 @@ namespace Vigilante.Data
             //Seed Default Admin User
             defaultUser = new VGUser
             {
-                UserName = "btadmin2@bugtracker.com",
-                Email = "btadmin2@bugtracker.com",
+                UserName = "vgadmin2@vigilante.com",
+                Email = "vgadmin2@vigilante.com",
                 FirstName = "Steve",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -279,8 +279,8 @@ namespace Vigilante.Data
             //Seed Default ProjectManager1 User
             defaultUser = new VGUser
             {
-                UserName = "ProjectManager1@bugtracker.com",
-                Email = "ProjectManager1@bugtracker.com",
+                UserName = "ProjectManager1@vigilante.com",
+                Email = "ProjectManager1@vigilante.com",
                 FirstName = "John",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -308,8 +308,8 @@ namespace Vigilante.Data
             //Seed Default ProjectManager2 User
             defaultUser = new VGUser
             {
-                UserName = "ProjectManager2@bugtracker.com",
-                Email = "ProjectManager2@bugtracker.com",
+                UserName = "ProjectManager2@vigilante.com",
+                Email = "ProjectManager2@vigilante.com",
                 FirstName = "Jane",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -337,8 +337,8 @@ namespace Vigilante.Data
             //Seed Default Developer1 User
             defaultUser = new VGUser
             {
-                UserName = "Developer1@bugtracker.com",
-                Email = "Developer1@bugtracker.com",
+                UserName = "Developer1@vigilante.com",
+                Email = "Developer1@vigilante.com",
                 FirstName = "Elon",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -366,8 +366,8 @@ namespace Vigilante.Data
             //Seed Default Developer2 User
             defaultUser = new VGUser
             {
-                UserName = "Developer2@bugtracker.com",
-                Email = "Developer2@bugtracker.com",
+                UserName = "Developer2@vigilante.com",
+                Email = "Developer2@vigilante.com",
                 FirstName = "James",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -395,8 +395,8 @@ namespace Vigilante.Data
             //Seed Default Developer3 User
             defaultUser = new VGUser
             {
-                UserName = "Developer3@bugtracker.com",
-                Email = "Developer3@bugtracker.com",
+                UserName = "Developer3@vigilante.com",
+                Email = "Developer3@vigilante.com",
                 FirstName = "Natasha",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -424,8 +424,8 @@ namespace Vigilante.Data
             //Seed Default Developer4 User
             defaultUser = new VGUser
             {
-                UserName = "Developer4@bugtracker.com",
-                Email = "Developer4@bugtracker.com",
+                UserName = "Developer4@vigilante.com",
+                Email = "Developer4@vigilante.com",
                 FirstName = "Carol",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -453,8 +453,8 @@ namespace Vigilante.Data
             //Seed Default Developer5 User
             defaultUser = new VGUser
             {
-                UserName = "Developer5@bugtracker.com",
-                Email = "Developer5@bugtracker.com",
+                UserName = "Developer5@vigilante.com",
+                Email = "Developer5@vigilante.com",
                 FirstName = "Tony",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -481,8 +481,8 @@ namespace Vigilante.Data
             //Seed Default Developer6 User
             defaultUser = new VGUser
             {
-                UserName = "Developer6@bugtracker.com",
-                Email = "Developer6@bugtracker.com",
+                UserName = "Developer6@vigilante.com",
+                Email = "Developer6@vigilante.com",
                 FirstName = "Bruce",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -509,8 +509,8 @@ namespace Vigilante.Data
             //Seed Default Submitter1 User
             defaultUser = new VGUser
             {
-                UserName = "Submitter1@bugtracker.com",
-                Email = "Submitter1@bugtracker.com",
+                UserName = "Submitter1@vigilante.com",
+                Email = "Submitter1@vigilante.com",
                 FirstName = "Scott",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -538,8 +538,8 @@ namespace Vigilante.Data
             //Seed Default Submitter2 User
             defaultUser = new VGUser
             {
-                UserName = "Submitter2@bugtracker.com",
-                Email = "Submitter2@bugtracker.com",
+                UserName = "Submitter2@vigilante.com",
+                Email = "Submitter2@vigilante.com",
                 FirstName = "Sue",
                 LastName = "Appuser",
                 EmailConfirmed = true,
@@ -570,8 +570,8 @@ namespace Vigilante.Data
             //Seed Demo Admin User
             var defaultUser = new VGUser
             {
-                UserName = "demoadmin@bugtracker.com",
-                Email = "demoadmin@bugtracker.com",
+                UserName = "demoadmin@vigilante.com",
+                Email = "demoadmin@vigilante.com",
                 FirstName = "Demo",
                 LastName = "Admin",
                 EmailConfirmed = true,
@@ -601,8 +601,8 @@ namespace Vigilante.Data
             //Seed Demo ProjectManager User
             defaultUser = new VGUser
             {
-                UserName = "demopm@bugtracker.com",
-                Email = "demopm@bugtracker.com",
+                UserName = "demopm@vigilante.com",
+                Email = "demopm@vigilante.com",
                 FirstName = "Demo",
                 LastName = "ProjectManager",
                 EmailConfirmed = true,
@@ -631,8 +631,8 @@ namespace Vigilante.Data
             //Seed Demo SeniorManager User
             defaultUser = new VGUser
             {
-                UserName = "demodev@bugtracker.com",
-                Email = "demodev@bugtracker.com",
+                UserName = "demodev@vigilante.com",
+                Email = "demodev@vigilante.com",
                 FirstName = "Demo",
                 LastName = "SeniorManager",
                 EmailConfirmed = true,
@@ -661,8 +661,8 @@ namespace Vigilante.Data
             //Seed Demo Collaborators User
             defaultUser = new VGUser
             {
-                UserName = "demosub@bugtracker.com",
-                Email = "demosub@bugtracker.com",
+                UserName = "demosub@vigilante.com",
+                Email = "demosub@vigilante.com",
                 FirstName = "Demo",
                 LastName = "Collaborators",
                 EmailConfirmed = true,
@@ -691,8 +691,8 @@ namespace Vigilante.Data
             //Seed Demo New User
             defaultUser = new VGUser
             {
-                UserName = "demonew@bugtracker.com",
-                Email = "demonew@bugtracker.com",
+                UserName = "demonew@vigilante.com",
+                Email = "demonew@vigilante.com",
                 FirstName = "Demo",
                 LastName = "NewUser",
                 EmailConfirmed = true,
@@ -807,7 +807,7 @@ namespace Vigilante.Data
             //Get project Ids
             int portfolioId = context.Projects.FirstOrDefault(p => p.Name == "Build a Personal Porfolio").Id;
             int blogId = context.Projects.FirstOrDefault(p => p.Name == "Build a supplemental Blog Web Application").Id;
-            int bugtrackerId = context.Projects.FirstOrDefault(p => p.Name == "Build an Issue Tracking Web Application").Id;
+            int vigilanteId = context.Projects.FirstOrDefault(p => p.Name == "Build an Issue Tracking Web Application").Id;
             int movieId = context.Projects.FirstOrDefault(p => p.Name == "Build a Movie Information Web Application").Id;
 
             //Get ticket type Ids
@@ -860,37 +860,37 @@ namespace Vigilante.Data
                                 new Ticket() {Title = "Blog Ticket 15", Description = "Ticket details for blog ticket 15", Created = DateTimeOffset.Now, ProjectId = blogId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew,  TicketTypeId = typeChangeRequest},
                                 new Ticket() {Title = "Blog Ticket 16", Description = "Ticket details for blog ticket 16", Created = DateTimeOffset.Now, ProjectId = blogId, TicketPriorityId = priorityUrgent, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
                                 new Ticket() {Title = "Blog Ticket 17", Description = "Ticket details for blog ticket 17", Created = DateTimeOffset.Now, ProjectId = blogId, TicketPriorityId = priorityHigh, TicketStatusId = statusDev,  TicketTypeId = typeNewDev},
-                                //BUGTRACKER                                                                                                                         
-                                new Ticket() {Title = "Bug Tracker Ticket 1", Description = "Ticket details for bug tracker ticket 1", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 2", Description = "Ticket details for bug tracker ticket 2", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 3", Description = "Ticket details for bug tracker ticket 3", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 4", Description = "Ticket details for bug tracker ticket 4", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 5", Description = "Ticket details for bug tracker ticket 5", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 6", Description = "Ticket details for bug tracker ticket 6", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 7", Description = "Ticket details for bug tracker ticket 7", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 8", Description = "Ticket details for bug tracker ticket 8", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 9", Description = "Ticket details for bug tracker ticket 9", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 10", Description = "Ticket details for bug tracker 10", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 11", Description = "Ticket details for bug tracker 11", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 12", Description = "Ticket details for bug tracker 12", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 13", Description = "Ticket details for bug tracker 13", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 14", Description = "Ticket details for bug tracker 14", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 15", Description = "Ticket details for bug tracker 15", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 16", Description = "Ticket details for bug tracker 16", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 17", Description = "Ticket details for bug tracker 17", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 18", Description = "Ticket details for bug tracker 18", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 19", Description = "Ticket details for bug tracker 19", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 20", Description = "Ticket details for bug tracker 20", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 21", Description = "Ticket details for bug tracker 21", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 22", Description = "Ticket details for bug tracker 22", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 23", Description = "Ticket details for bug tracker 23", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 24", Description = "Ticket details for bug tracker 24", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 25", Description = "Ticket details for bug tracker 25", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 26", Description = "Ticket details for bug tracker 26", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 27", Description = "Ticket details for bug tracker 27", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 28", Description = "Ticket details for bug tracker 28", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 29", Description = "Ticket details for bug tracker 29", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
-                                new Ticket() {Title = "Bug Tracker Ticket 30", Description = "Ticket details for bug tracker 30", Created = DateTimeOffset.Now, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                //vigilante                                                                                                                         
+                                new Ticket() {Title = "Bug Tracker Ticket 1", Description = "Ticket details for bug tracker ticket 1", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 2", Description = "Ticket details for bug tracker ticket 2", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 3", Description = "Ticket details for bug tracker ticket 3", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 4", Description = "Ticket details for bug tracker ticket 4", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 5", Description = "Ticket details for bug tracker ticket 5", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 6", Description = "Ticket details for bug tracker ticket 6", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 7", Description = "Ticket details for bug tracker ticket 7", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 8", Description = "Ticket details for bug tracker ticket 8", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 9", Description = "Ticket details for bug tracker ticket 9", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 10", Description = "Ticket details for bug tracker 10", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 11", Description = "Ticket details for bug tracker 11", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 12", Description = "Ticket details for bug tracker 12", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 13", Description = "Ticket details for bug tracker 13", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 14", Description = "Ticket details for bug tracker 14", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 15", Description = "Ticket details for bug tracker 15", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 16", Description = "Ticket details for bug tracker 16", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 17", Description = "Ticket details for bug tracker 17", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 18", Description = "Ticket details for bug tracker 18", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 19", Description = "Ticket details for bug tracker 19", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 20", Description = "Ticket details for bug tracker 20", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 21", Description = "Ticket details for bug tracker 21", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 22", Description = "Ticket details for bug tracker 22", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 23", Description = "Ticket details for bug tracker 23", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 24", Description = "Ticket details for bug tracker 24", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 25", Description = "Ticket details for bug tracker 25", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 26", Description = "Ticket details for bug tracker 26", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 27", Description = "Ticket details for bug tracker 27", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 28", Description = "Ticket details for bug tracker 28", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 29", Description = "Ticket details for bug tracker 29", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
+                                new Ticket() {Title = "Bug Tracker Ticket 30", Description = "Ticket details for bug tracker 30", Created = DateTimeOffset.Now, ProjectId = vigilanteId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
                                 //MOVIE
                                 new Ticket() {Title = "Movie Ticket 1", Description = "Ticket details for movie ticket 1", Created = DateTimeOffset.Now, ProjectId = movieId, TicketPriorityId = priorityLow, TicketStatusId = statusNew, TicketTypeId = typeDefect},
                                 new Ticket() {Title = "Movie Ticket 2", Description = "Ticket details for movie ticket 2", Created = DateTimeOffset.Now, ProjectId = movieId, TicketPriorityId = priorityMedium, TicketStatusId = statusDev, TicketTypeId = typeEnhancement},

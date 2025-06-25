@@ -41,6 +41,19 @@ namespace Vigilante.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NotificationTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotificationTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProjectPriorities",
                 columns: table => new
                 {
@@ -404,11 +417,12 @@ namespace Vigilante.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TicketId = table.Column<int>(type: "integer", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    Message = table.Column<int>(type: "integer", nullable: false),
+                    Message = table.Column<string>(type: "text", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     RecipientId = table.Column<string>(type: "text", nullable: false),
                     SenderId = table.Column<string>(type: "text", nullable: false),
-                    Viewed = table.Column<bool>(type: "boolean", nullable: false)
+                    Viewed = table.Column<bool>(type: "boolean", nullable: false),
+                    NotificationTypeId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -425,6 +439,11 @@ namespace Vigilante.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Notifications_NotificationTypes_NotificationTypeId",
+                        column: x => x.NotificationTypeId,
+                        principalTable: "NotificationTypes",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Notifications_Tickets_TicketId",
                         column: x => x.TicketId,
@@ -503,7 +522,7 @@ namespace Vigilante.Data.Migrations
                     OldValue = table.Column<string>(type: "text", nullable: false),
                     NewValue = table.Column<string>(type: "text", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -584,6 +603,11 @@ namespace Vigilante.Data.Migrations
                 name: "IX_Invites_ProjectId",
                 table: "Invites",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_NotificationTypeId",
+                table: "Notifications",
+                column: "NotificationTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_RecipientId",
@@ -714,6 +738,9 @@ namespace Vigilante.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "NotificationTypes");
 
             migrationBuilder.DropTable(
                 name: "Tickets");

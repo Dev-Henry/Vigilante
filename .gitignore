@@ -327,8 +327,8 @@ __pycache__/
 *.jmconfig
 
 # BizTalk build output
-*.btp.cs
-*.btm.cs
+*.vgp.cs
+*.vgm.cs
 *.odx.cs
 *.xsd.cs
 

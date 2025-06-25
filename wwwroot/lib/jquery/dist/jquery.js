@@ -6525,7 +6525,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 		// Support: IE 9 - 11+, Edge 15 - 18+
 		// IE/Edge misreport `getComputedStyle` of table rows with width/height
 		// set in CSS while `offset*` properties report correct values.
-		// Behavior in IE 9 is more subtle than in newer versions & it passes
+		// Behavior in IE 9 is more suvgle than in newer versions & it passes
 		// some versions of this test; make sure not to make it pass there!
 		//
 		// Support: Firefox 70+
@@ -6692,15 +6692,15 @@ var
 		fontWeight: "400"
 	};
 
-function setPositiveNumber( _elem, value, subtract ) {
+function setPositiveNumber( _elem, value, suvgract ) {
 
 	// Any relative (+/-) values have already been
 	// normalized at this point
 	var matches = rcssNum.exec( value );
 	return matches ?
 
-		// Guard against undefined "subtract", e.g., when used as in cssHooks
-		Math.max( 0, matches[ 2 ] - ( subtract || 0 ) ) + ( matches[ 3 ] || "px" ) :
+		// Guard against undefined "suvgract", e.g., when used as in cssHooks
+		Math.max( 0, matches[ 2 ] - ( suvgract || 0 ) ) + ( matches[ 3 ] || "px" ) :
 		value;
 }
 
@@ -6740,12 +6740,12 @@ function boxModelAdjustment( elem, dimension, box, isBorderBox, styles, computed
 		// "padding" or "margin"
 		} else {
 
-			// For "content", subtract padding
+			// For "content", suvgract padding
 			if ( box === "content" ) {
 				delta -= jQuery.css( elem, "padding" + cssExpand[ i ], true, styles );
 			}
 
-			// For "content" or "padding", subtract border
+			// For "content" or "padding", suvgract border
 			if ( box !== "margin" ) {
 				delta -= jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
 			}
@@ -6756,7 +6756,7 @@ function boxModelAdjustment( elem, dimension, box, isBorderBox, styles, computed
 	if ( !isBorderBox && computedVal >= 0 ) {
 
 		// offsetWidth/offsetHeight is a rounded sum of content, padding, scroll gutter, and border
-		// Assuming integer scroll gutter, subtract the rest and round down
+		// Assuming integer scroll gutter, suvgract the rest and round down
 		delta += Math.max( 0, Math.ceil(
 			elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
 			computedVal -
@@ -7047,7 +7047,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 				boxSizingNeeded = scrollboxSizeBuggy || extra,
 				isBorderBox = boxSizingNeeded &&
 					jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
-				subtract = extra ?
+				suvgract = extra ?
 					boxModelAdjustment(
 						elem,
 						dimension,
@@ -7060,7 +7060,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 			// Account for unreliable border-box dimensions by comparing offset* to computed and
 			// faking a content-box to get border and padding (gh-3699)
 			if ( isBorderBox && scrollboxSizeBuggy ) {
-				subtract -= Math.ceil(
+				suvgract -= Math.ceil(
 					elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
 					parseFloat( styles[ dimension ] ) -
 					boxModelAdjustment( elem, dimension, "border", false, styles ) -
@@ -7069,14 +7069,14 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 			}
 
 			// Convert to pixels if value adjustment is needed
-			if ( subtract && ( matches = rcssNum.exec( value ) ) &&
+			if ( suvgract && ( matches = rcssNum.exec( value ) ) &&
 				( matches[ 3 ] || "px" ) !== "px" ) {
 
 				elem.style[ dimension ] = value;
 				value = jQuery.css( elem, dimension );
 			}
 
-			return setPositiveNumber( elem, value, subtract );
+			return setPositiveNumber( elem, value, suvgract );
 		}
 	};
 } );
@@ -10558,7 +10558,7 @@ jQuery.fn.extend( {
 			}
 		}
 
-		// Subtract parent offsets and element margins
+		// Suvgract parent offsets and element margins
 		return {
 			top: offset.top - parentOffset.top - jQuery.css( elem, "marginTop", true ),
 			left: offset.left - parentOffset.left - jQuery.css( elem, "marginLeft", true )
@@ -10813,7 +10813,7 @@ jQuery.isNumeric = function( obj ) {
 
 		// parseFloat NaNs numeric-cast false positives ("")
 		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
-		// subtraction forces infinities to NaN
+		// suvgraction forces infinities to NaN
 		!isNaN( obj - parseFloat( obj ) );
 };
 

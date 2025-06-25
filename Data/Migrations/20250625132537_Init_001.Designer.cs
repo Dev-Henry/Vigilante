@@ -12,15 +12,15 @@ using Vigilante.Data;
 namespace Vigilante.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250623104938_Init_002")]
-    partial class Init_002
+    [Migration("20250625132537_Init_001")]
+    partial class Init_001
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.6")
+                .HasAnnotation("ProductVersion", "8.0.17")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -267,6 +267,9 @@ namespace Vigilante.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("NotificationTypeId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("RecipientId")
                         .IsRequired()
                         .HasColumnType("text");
@@ -286,6 +289,8 @@ namespace Vigilante.Data.Migrations
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NotificationTypeId");
 
                     b.HasIndex("RecipientId");
 
@@ -529,7 +534,6 @@ namespace Vigilante.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NewValue")
@@ -800,6 +804,10 @@ namespace Vigilante.Data.Migrations
 
             modelBuilder.Entity("Vigilante.Models.Notification", b =>
                 {
+                    b.HasOne("Vigilante.Models.NotificationType", "NotificationType")
+                        .WithMany()
+                        .HasForeignKey("NotificationTypeId");
+
                     b.HasOne("Vigilante.Models.VGUser", "Recipient")
                         .WithMany()
                         .HasForeignKey("RecipientId")
@@ -817,6 +825,8 @@ namespace Vigilante.Data.Migrations
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("NotificationType");
 
                     b.Navigation("Recipient");
 
