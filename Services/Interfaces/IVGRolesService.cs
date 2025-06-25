@@ -1,4 +1,5 @@
-﻿using Vigilante.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Vigilante.Models;
 
 namespace Vigilante.Services.Interfaces
 {
@@ -8,6 +9,9 @@ namespace Vigilante.Services.Interfaces
 
         //add threading to keep the application running smoothly 
         public Task<bool> IsUserInRoleAsync(VGUser user, string roleName);
+
+        public Task<List<IdentityRole>> GetRolesAsync();
+
 
         public Task<IEnumerable<string>> GetUserRolesAsync (VGUser user);
 

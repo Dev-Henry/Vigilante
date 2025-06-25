@@ -1,0 +1,22 @@
+﻿
+<div class="row">
+    <h2 class="mt-0 h3"><b>Manage Member Roles</b></h2>
+    @foreach (var member in Model)
+    {
+        <div class="row">
+            <div class="card col-4 m-3">
+                <div class="card-body">
+                    <p class="text-muted font-13 m-b-30">
+                        This form displays the current roles assigned to each member.
+                        Use the dropdown to select the role each member should be assigned.
+                        Once the role is selected, click "Assign Roles" to submit the form.
+                    </p>
+                    <hr />
+                    <form asp-action="ManageUSerRoles" asp-controller="UserRoles" method="post">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
