@@ -6,17 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Vigilante.Data;
+using Vigilante.Extensions;
 using Vigilante.Models;
+using Vigilante.Models.ENUMs;
+using Vigilante.Models.ViewModels;
+using Vigilante.Services.Interfaces;
 
 namespace Vigilante.Controllers
 {
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IVGRolesService _rolesService;
+        private readonly IVGLookUpService _lookupService;
 
-        public ProjectsController(ApplicationDbContext context)
+
+
+        public ProjectsController(ApplicationDbContext context,
+                                  IVGRolesService rolesService,
+                                  IVGLookUpService lookUpService)
         {
             _context = context;
+            _rolesService = rolesService;
+            _lookupService = lookUpService;
         }
 
         // GET: Projects
@@ -46,10 +58,20 @@ namespace Vigilante.Controllers
         }
 
         // GET: Projects/Create
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
-            return View();
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            //Add ViewModel instance "AddProjectWithPMViewModel"
+            AddProjectWithPMViewModel model = new();
+
+
+            //Load SelectLists with data, that is, PmLIst and PriorityList
+            model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(Roles.ProjectManager.ToString(),
+                                          companyId), "Id", "FullName");
+            model.PriorityList = new SelectList(await _lookupService.GetProjectPrioritiesAsync(), "Id", "Name");
+
+            return View(model);
         }
 
         // POST: Projects/Create
