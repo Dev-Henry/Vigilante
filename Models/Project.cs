@@ -28,8 +28,10 @@ namespace Vigilante.Models
         public DateTimeOffset CreatedDate { get; set; }
 
         [DisplayName("Start Date")]
+        [DataType(DataType.Date)]
         public DateTimeOffset StartDate { get; set; }
 
+        [DataType(DataType.Date)]
         [DisplayName("End Date")]
         public DateTimeOffset EndDate { get; set; }
 

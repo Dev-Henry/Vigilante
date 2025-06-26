@@ -29,14 +29,17 @@ namespace Vigilante.Services
 
         public async Task<List<TicketPriority>> GetTicketPrioritiesAsync()
         {
+            throw new NotImplementedException();
         }
 
         public async Task<List<TicketStatus>> GetTicketStatusesAsync()
         {
+            throw new NotImplementedException();
         }
 
         public async Task<List<TicketType>> GetTicketTypeAsync()
         {
+            throw new NotImplementedException();
         }
     }
 }

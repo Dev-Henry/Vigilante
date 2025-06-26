@@ -34,23 +34,31 @@
                 <span asp-validation-for="Project.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Choose a priority</label>
-                <span asp-validation-for="ProjectPriority" class="text-danger" asp-items="@Model.PriorityList"></span>
+                <label asp-for="Project.ProjectPriorityId" class="control-label">Choose a priority</label>
+                <select asp-for="Project.ProjectPriorityId" class="form-control" asp-items="@Model.PriorityList">
+                    <option></option>
+                </select>
             </div>
             <div class="form-group">
-                <label class="control-label">Image of the Project</label>
+                <label class="control-label">Project Image</label>
                 <input asp-for="Project.ImageFormFile" class="form-control" type="file" accept=".png,.jpg,.jpeg,.gif"
                         onchange="document.getElementById('imageFileData').src = window.URL.createObjectURL(this.files[0])"/>
                 <span asp-validation-for="Project.ImageFormFile" class="text-danger"></span>
             </div>
             <label>Image Preview</label>
-            @if (Model.Project.ImageFileData!=null)
+            @if (Model.Project?.ImageFileData!=null)
             {
                 <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(Model.Project.ImageFileData))">
             }
+            else
+            {
+                <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="/">
+            }
             <div class="form-group">
                 <label class="control-label">Project Manager</label>
-                <span asp-validation-for="PmId" class="text-danger" asp-items="@Model.PMList"></span>
+                <select asp-for="PmId" class="form-control" asp-items="@Model.PMList">
+                    <option></option>
+                </select>
             </div>
 
             <div class="form-group">
