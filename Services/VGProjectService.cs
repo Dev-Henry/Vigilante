@@ -103,10 +103,25 @@ namespace Vigilante.Services
         // CRUD operations - Delete 
         public async Task ArchiveProjectAsync(Project project)
         {
-            //soft delete 
-            project.Archived = true;
-            _context.Update(project);
-            await _context.SaveChangesAsync();
+            try
+            {
+                //soft delete 
+                project.Archived = true;
+                await UpdateProjectAsync(project);
+
+                //Archive the tickets for the project
+                foreach (Ticket ticket in project.Tickets)
+                {
+                    ticket.ArchivedByProject = true;
+                    _context.Update(ticket);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
 
@@ -369,11 +384,43 @@ namespace Vigilante.Services
             }
         }
 
+        public async Task RestoreProjectAsync(Project project)
+        {
+            try
+            {
+                //soft delete 
+                project.Archived = false;
+                await UpdateProjectAsync(project);
+
+                //Archive the tickets for the project
+                foreach (Ticket ticket in project.Tickets)
+                {
+                    ticket.ArchivedByProject = false;
+                    _context.Update(ticket);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         // CRUD operations - Update 
         public async Task UpdateProjectAsync(Project project)
         {
-            _context.Update(project);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Update(project);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

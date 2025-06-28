@@ -46,6 +46,7 @@ namespace Vigilante.Models
         [DisplayName("File Name")]
         public string? ImageFileName { get; set; }
 
+
         public byte[]? ImageFileData { get; set; }
 
         [DisplayName("File Extension")]

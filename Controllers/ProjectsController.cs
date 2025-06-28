@@ -36,7 +36,9 @@ namespace Vigilante.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Projects.Include(p => p.Company);
+            //added an include for the project priority property
+            var applicationDbContext = _context.Projects.Include(p => p.Company)
+                                                        .Include(p =>p.ProjectPriority);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -69,8 +71,7 @@ namespace Vigilante.Controllers
 
 
             //Load SelectLists with data, that is, PmLIst and PriorityList
-            model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(Roles.ProjectManager.ToString(),
-                                          companyId), "Id", "FullName");
+            model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(Roles.ProjectManager.ToString(),companyId), "Id", "FullName");
             model.PriorityList = new SelectList(await _lookupService.GetProjectPrioritiesAsync(), "Id", "Name");
 
             return View(model);
@@ -101,18 +102,20 @@ namespace Vigilante.Controllers
                     await _projectService.AddNewProjectAsync(model.Project);
 
                     //check if project manager is selected or not 
-                    if(string.IsNullOrEmpty(model.PmId))
+                    if(!string.IsNullOrEmpty(model.PmId))
                     {
                         await _projectService.AddProjectManagerAsync(model.PmId, model.Project.Id);
                     }
+
+                    //todo: redirect to all projects
+                    return RedirectToAction("Index");
+
                 }
                 catch (Exception)
                 {
                     throw;
                 }
 
-                //todo: redirect to all projects
-                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Create");
@@ -121,18 +124,20 @@ namespace Vigilante.Controllers
         // GET: Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            int companyId = User.Identity.GetCompanyId().Value;
 
-            var project = await _context.Projects.FindAsync(id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", project.CompanyId);
-            return View(project);
+            //Add ViewModel instance "AddProjectWithPMViewModel"
+            AddProjectWithPMViewModel model = new();
+
+            model.Project = await _projectService.GetProjectByIdAsync(id.Value, companyId);
+
+
+            //Load SelectLists with data, that is, PmLIst and PriorityList
+            model.PMList = new SelectList(await _rolesService.GetUsersInRoleAsync(Roles.ProjectManager.ToString(),
+                                          companyId), "Id", "FullName");
+            model.PriorityList = new SelectList(await _lookupService.GetProjectPrioritiesAsync(), "Id", "Name");
+
+            return View(model);
         }
 
         // POST: Projects/Edit/5
@@ -140,48 +145,51 @@ namespace Vigilante.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyId,Name,Description,StartDate,EndDate,ProjectPriorityId,ImageFileName,ImageFileData,ImageContentType,Archived")] Project project)
+        public async Task<IActionResult> Edit(AddProjectWithPMViewModel model)
         {
-            if (id != project.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
+            if (model != null)
             {
                 try
                 {
-                    _context.Update(project);
-                    await _context.SaveChangesAsync();
+                    if (model.Project.ImageFormFile != null)
+                    {
+                        model.Project.ImageFileData = await _fileService.ConvertFileToByteArrayAsync(model.Project.ImageFormFile);
+                        model.Project.ImageFileName = model.Project.ImageFormFile.FileName;
+                        model.Project.ImageContentType = model.Project.ImageFormFile.ContentType;
+                    }
+
+                    await _projectService.UpdateProjectAsync(model.Project);
+
+                    //check if project manager is selected or not 
+                    if (!string.IsNullOrEmpty(model.PmId))
+                    {
+                        await _projectService.AddProjectManagerAsync(model.PmId, model.Project.Id);
+                    }
+
+                    //todo: redirect to all projects
+                    return RedirectToAction("Index");
                 }
-                catch (DbUpdateConcurrencyException)
+
+                catch (Exception)
                 {
-                    if (!ProjectExists(project.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", project.CompanyId);
-            return View(project);
+
+            return RedirectToAction("Edit");
         }
 
-        // GET: Projects/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Projects/Archive/5
+        public async Task<IActionResult> Archive(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var project = await _context.Projects
-                .Include(p => p.Company)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            int companyId = User.Identity.GetCompanyId().Value;
+            var project = await _projectService.GetProjectByIdAsync(id.Value,companyId);
+
             if (project == null)
             {
                 return NotFound();
@@ -191,17 +199,49 @@ namespace Vigilante.Controllers
         }
 
         // POST: Projects/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ArchiveConfirmed(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
-            if (project != null)
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            var project = await _projectService.GetProjectByIdAsync(id, companyId);
+
+
+            await _projectService.ArchiveProjectAsync(project);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Projects/Restore/5
+        public async Task<IActionResult> Restore(int? id)
+        {
+            if (id == null)
             {
-                _context.Projects.Remove(project);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            int companyId = User.Identity.GetCompanyId().Value;
+            var project = await _projectService.GetProjectByIdAsync(id.Value, companyId);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return View(project);
+        }
+
+        // POST: Projects/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            var project = await _projectService.GetProjectByIdAsync(id, companyId);
+            await _projectService.RestoreProjectAsync(project);
+
+
             return RedirectToAction(nameof(Index));
         }
 
