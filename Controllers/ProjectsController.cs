@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,19 +19,24 @@ namespace Vigilante.Controllers
         private readonly IVGLookUpService _lookupService;
         private readonly IVGFileService _fileService;
         private readonly IVGProjectService _projectService;
-
+        private readonly UserManager<VGUser> _userManager;
+        private readonly IVGCompanyInfoService _companyInfoService;
 
         public ProjectsController(ApplicationDbContext context,
                                   IVGRolesService rolesService,
                                   IVGLookUpService lookUpService,
                                   IVGFileService fileService,
-                                  IVGProjectService projectService)
+                                  IVGProjectService projectService,
+                                  UserManager<VGUser> userManager,
+                                  IVGCompanyInfoService companyInfoService)
         {
             _context = context;
             _rolesService = rolesService;
             _lookupService = lookUpService;
             _fileService = fileService;
             _projectService = projectService;
+            _userManager = userManager;
+            _companyInfoService = companyInfoService;
         }
 
         // GET: Projects
@@ -41,6 +47,35 @@ namespace Vigilante.Controllers
                                                         .Include(p =>p.ProjectPriority);
             return View(await applicationDbContext.ToListAsync());
         }
+
+
+        public async Task<IActionResult> MyProjects()
+        {
+            string userId = _userManager.GetUserId(User);
+
+            List<Project> projects = await _projectService.GetUserProjectsAsync(userId);
+            return View(projects);
+        }
+
+        public async Task<IActionResult> AllProjects()
+        {
+            List<Project> projects = new();
+
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+            {
+                //Get all projects for Admins and Project Managers
+                projects = await _companyInfoService.GetAllProjectsAsync(companyId);
+            }
+            else
+            {
+               projects = await _projectService.GetAllProjectsByCompanyAsync(companyId);
+            }
+
+            return View(projects);
+        }
+
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -101,8 +136,8 @@ namespace Vigilante.Controllers
 
                     await _projectService.AddNewProjectAsync(model.Project);
 
-                    //check if project manager is selected or not 
-                    if(!string.IsNullOrEmpty(model.PmId))
+                    //Add PM if one is selected 
+                    if (!string.IsNullOrEmpty(model.PmId))
                     {
                         await _projectService.AddProjectManagerAsync(model.PmId, model.Project.Id);
                     }
@@ -115,7 +150,6 @@ namespace Vigilante.Controllers
                 {
                     throw;
                 }
-
             }
 
             return RedirectToAction("Create");

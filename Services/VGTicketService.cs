@@ -346,25 +346,25 @@ namespace Vigilante.Services
             {
                 if (await _rolesService.IsUserInRoleAsync(vgUser, Roles.Admin.ToString()))
                 {
-                    tickets = (await _projectService.GetAllProjectsByCompany(companyId))
+                    tickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId))
                                                     .SelectMany(p => p.Tickets).ToList();
                 }
                 else if (await _rolesService.IsUserInRoleAsync(vgUser, Roles.SeniorManager.ToString()))
                 {
-                    tickets = (await _projectService.GetAllProjectsByCompany(companyId))
+                    tickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId))
                                                     .SelectMany(t => t.Tickets)
                                                     .Where(t => t.DeveloperUserId == userId || t.OwnerUserId == userId).ToList();
                 }
                 else if (await _rolesService.IsUserInRoleAsync(vgUser!, nameof(Roles.Collaborators)))
                 {
-                    tickets = (await _projectService.GetAllProjectsByCompany(companyId))
+                    tickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId))
                                                     .SelectMany(t => t.Tickets).Where(t => t.OwnerUserId == userId).ToList();
                 }
                 else if (await _rolesService.IsUserInRoleAsync(vgUser!, nameof(Roles.ProjectManager)))
 
                 {
                     List<Ticket> projectTickets = (await _projectService.GetUserProjectsAsync(userId)).SelectMany(t => t.Tickets!).ToList();
-                    List<Ticket> submittedTickets = (await _projectService.GetAllProjectsByCompany(companyId))
+                    List<Ticket> submittedTickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId))
                                                                           .SelectMany(p => p.Tickets!)
                                                                           .Where(t => t.OwnerUserId != userId).ToList();
                     tickets = projectTickets.Concat(submittedTickets).ToList();

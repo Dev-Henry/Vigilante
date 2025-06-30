@@ -29,44 +29,73 @@ namespace Vigilante.Services
 
         public async Task<bool> AddProjectManagerAsync(string userId, int projectId)
         {
-            VGUser currentPM = await GetProjectManagerAsync(projectId);
+            //VGUser currentPM = await GetProjectManagerAsync(projectId);
 
-            //remove the current PM if necessary 
-            if (currentPM != null)
-            {
-                try
-                {
-                    await RemoveProjectManagerAsync(projectId);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error removing current PM. - Error :{ex.Message}");
-                    return false;
-                }
+            ////remove the current PM if necessary 
+            //if (currentPM != null)
+            //{
+            //    try
+            //    {
+            //        await RemoveProjectManagerAsync(projectId);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine($"Error removing current PM. - Error :{ex.Message}");
+            //        return false;
+            //    }
+            //}
 
-                //add the new PM
-                try
-                {
-                    await AddProjectManagerAsync(userId, projectId);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error adding new PM. - Error :{ex.Message}");
-                    return false;
-                }
-            }
-            //Catch-all return if there was no current PM
+            ////add the new PM
+            //try
+            //{
+            //    await AddProjectManagerAsync(userId, projectId);
+            //    return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Error adding new PM. - Error :{ex.Message}");
+            //    return false;
+            //}
+
             try
-            {
-                await AddProjectManagerAsync(userId, projectId);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error adding new PM. - Error :{ex.Message}");
-                return false;
-            }
+    {
+        // Remove current PM if any
+        VGUser currentPM = await GetProjectManagerAsync(projectId);
+        if (currentPM != null)
+        {
+            await RemoveProjectManagerAsync(projectId);
+        }
+
+        // Add the new PM
+        Project project = await _context.Projects
+                                        .Include(p => p.Members)
+                                        .FirstOrDefaultAsync(p => p.Id == projectId);
+
+        VGUser newPM = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (project == null || newPM == null)
+        {
+            return false;
+        }
+
+        // Add the PM to the Members if not already
+        if (!project.Members.Any(m => m.Id == userId))
+        {
+            project.Members.Add(newPM);
+        }
+
+        // Save to a separate table/assignment logic if needed
+        // (e.g., Role-based assignment if you track PMs separately)
+
+        // Save changes
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error assigning Project Manager: {ex.Message}");
+        return false;
+    }
         }
 
         public async Task<bool> AddUserToProjectAsync(string userId, int projectId)
@@ -135,7 +164,7 @@ namespace Vigilante.Services
             return teamMembers;
         }
 
-        public async Task<List<Project>> GetAllProjectsByCompany(int companyId)
+        public async Task<List<Project>> GetAllProjectsByCompanyAsync(int companyId)
         {
             List<Project> projects = new();
 
@@ -167,7 +196,7 @@ namespace Vigilante.Services
 
         public async Task<List<Project>> GetAllProjectsByPriority(int companyId, string priorityName)
         {
-            List<Project> projects = await GetAllProjectsByCompany(companyId);
+            List<Project> projects = await GetAllProjectsByCompanyAsync(companyId);
             int priorityId = await LookUpProjectPriorityId(priorityName);
 
             return projects.Where(p => p.ProjectPriorityId == priorityId).ToList();
@@ -175,7 +204,7 @@ namespace Vigilante.Services
 
         public async Task<List<Project>> GetArchivedProjectsByCompany(int companyId)
         {
-            List<Project> projects = await GetAllProjectsByCompany(companyId);
+            List<Project> projects = await GetAllProjectsByCompanyAsync(companyId);
 
             return projects.Where(p => p.Archived == true).ToList();
         }

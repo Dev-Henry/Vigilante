@@ -1,22 +1,89 @@
-html {
+/*original code
+*//*html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+  /* Custom styles for the application */
+/* Ensures the body takes full viewport height and becomes a flex container for the main layout */
+html, body {
+    height: 100%; /* Important for vh units to work correctly on direct children */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent body scroll if content might go past vh */
 }
 
-.vgn:focus, .vgn:active:focus, .vgn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.wrapper {
+    display: flex; /* Makes the wrapper a flex container */
+    height: 100vh; /* Takes full viewport height */
+    width: 100%;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Left Sidebar - Navigation */
+.sidebar {
+    flex: 0 0 16.666667%; /* Equivalent to col-2; flex-grow:0, flex-shrink:0, base-size: ~16.6% */
+    /* Or simply width: 16.666667%; if you prefer fixed width for col-2 */
+    background-color: #212529; /* dark */
+    color: white;
+    display: flex; /* Makes the sidebar content a flex column */
+    flex-direction: column;
+    padding: 1rem; /* Adjust padding as needed */
+    overflow-y: auto; /* Allow scrolling for sidebar content if it overflows */
 }
 
-body {
-  margin-bottom: 60px;
+.sidebar-content {
+    flex-grow: 1; /* Pushes content to the top, ensures space for _LoginPartial at bottom */
+    display: flex;
+    flex-direction: column; /* Organize content vertically */
+    align-items: flex-start; /* align items to the start horizontally in sidebar for small screens */
+    /* You might remove align-items-sm-start if it's not having the desired effect with the flex-column */
+    align-items: sm-start; /* Align to start for larger screens */
+}
+
+/* Main Content Area (Right side) */
+.main-content-area {
+    flex-grow: 1; /* Allows main content to take up remaining horizontal space */
+    display: flex; /* Makes this a flex container for its children (main and footer) */
+    flex-direction: column; /* Stacks main and footer vertically */
+    overflow-y: auto; /* Allows scrolling for main content if it overflows */
+    padding: 1.5rem; /* General padding for content area */
+}
+
+.main-content {
+    flex-grow: 1; /* Main content grows to push footer down */
+    padding-bottom: 1.5rem; /* Add some padding before footer if needed */
+}
+
+.app-footer {
+    flex-shrink: 0; /* Footer won't shrink */
+    margin-top: auto; /* Pushes the footer to the bottom of the flex container */
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align footer content to the right */
+    padding-right: 15px; /* Adjust as needed for spacing */
+}
+
+/* Small screen adjustments for sidebar */
+@media (max-width: 991.98px) { /* Bootstrap's lg breakpoint for example */
+    .sidebar {
+        width: 100%; /* Full width for sidebar on small screens */
+        height: auto; /* Auto height on small screens */
+        position: static; /* No longer sticky on top */
+        flex-direction: row; /* Horizontal layout for nav on small screens */
+        justify-content: space-around; /* Distribute items horizontally */
+        padding: 0.5rem;
+    }
+
+    .sidebar-content {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap; /* Allow items to wrap */
+    }
+
+    .sidebar ul {
+        flex-direction: row !important; /* Force nav items horizontal */
+    }
+
+    .main-content-area {
+        padding: 1rem; /* Less padding on small screens */
+    }
 }

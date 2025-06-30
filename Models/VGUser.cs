@@ -32,7 +32,7 @@ namespace Vigilante.Models
         public string? AvatarContentType { get; set; }
 
         //null company Id - temporary
-        public int? CompanyId { get; set; }
+        public int CompanyId { get; set; }
 
 
         //Navigation Properties
