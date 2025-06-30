@@ -18,7 +18,7 @@ namespace Vigilante.Services.Interfaces
 
         public Task<List<VGUser>> GetAllProjectMembersExceptPMAsync(int projectId);
 
-        public Task<List<Project>> GetArchivedProjectsByCompany(int companyId);
+        public Task<List<Project>> GetArchivedProjectsByCompanyAsync(int companyId);
 
         public Task<List<VGUser>> GetDevelopersOnProjectAsync(int projectId);
 
