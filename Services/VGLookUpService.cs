@@ -29,17 +29,47 @@ namespace Vigilante.Services
 
         public async Task<List<TicketPriority>> GetTicketPrioritiesAsync()
         {
-            throw new NotImplementedException();
+            {
+                try
+                {
+                    return await _context.TicketPriorities.ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
         }
 
         public async Task<List<TicketStatus>> GetTicketStatusesAsync()
         {
-            throw new NotImplementedException();
+            {
+                try
+                {
+                    return await _context.TicketStatuses.ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
         }
 
         public async Task<List<TicketType>> GetTicketTypeAsync()
         {
-            throw new NotImplementedException();
+            {
+                try
+                {
+                    return await _context.TicketTypes.ToListAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
         }
     }
 }

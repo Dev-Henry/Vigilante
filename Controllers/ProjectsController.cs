@@ -48,7 +48,6 @@ namespace Vigilante.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-
         public async Task<IActionResult> MyProjects()
         {
             string userId = _userManager.GetUserId(User);
@@ -83,7 +82,6 @@ namespace Vigilante.Controllers
             List<Project> projects = await _projectService.GetArchivedProjectsByCompanyAsync(companyId);
             return View(projects);
         }
-
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
