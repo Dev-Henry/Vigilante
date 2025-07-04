@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Vigilante.Models
 {
@@ -17,14 +18,17 @@ namespace Vigilante.Models
         public int TicketId { get; set; }
 
         [DisplayName("Team Member")]
-        public string UserId { get; set; }
+        [BindNever]
+        public string? UserId { get; set; }
 
 
 
         //Navigation properties
-        public virtual Ticket Ticket { get; set; }
+        [BindNever]
+        public virtual Ticket? Ticket { get; set; }
 
-        public virtual VGUser User { get; set; }
+        [BindNever]
+        public virtual VGUser? User { get; set; }
     }
 }
 

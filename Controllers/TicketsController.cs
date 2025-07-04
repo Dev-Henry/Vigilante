@@ -12,6 +12,7 @@ using Vigilante.Data;
 using Vigilante.Extensions;
 using Vigilante.Models;
 using Vigilante.Models.ENUMs;
+using Vigilante.Services;
 using Vigilante.Services.Interfaces;
 
 namespace Vigilante.Controllers
@@ -229,24 +230,24 @@ namespace Vigilante.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddTicketComment([Bind("Id,TicketId,Comment")] TicketComment ticketComment)
+        public async Task<IActionResult> AddTicketComment([Bind("Id,TicketId,Comment")] TicketComment ticketComment) 
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     ticketComment.UserId = _userManager.GetUserId(User);
-                    ticketComment.Created = DateTimeOffset.Now;
+                    ticketComment.Created = DateTimeOffset.UtcNow;
 
                     await _ticketService.AddTicketCommentAsync(ticketComment);
                 }
                 catch (Exception)
                 {
+
                     throw;
                 }
             }
-
-            return RedirectToAction("Details", new { id = ticketComment.TicketId});
+            return RedirectToAction("Details", new { id = ticketComment.TicketId });
         }
 
         // GET: Tickets/Archive/5
