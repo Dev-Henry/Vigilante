@@ -37,4 +37,12 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Tickets\UnAssignedTickets.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Tickets\UnAssignedTickets.cshtml" />
+  </ItemGroup>
+
 </Project>

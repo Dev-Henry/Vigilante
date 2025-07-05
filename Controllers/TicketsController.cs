@@ -15,6 +15,7 @@ using Vigilante.Models;
 using Vigilante.Models.ENUMs;
 using Vigilante.Services;
 using Vigilante.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vigilante.Controllers
 {
@@ -81,6 +82,33 @@ namespace Vigilante.Controllers
             List<Ticket> tickets = await _ticketService.GetArchivedTicketsAsync(companyId);
 
             return View(tickets);
+        }
+
+        [Authorize(Roles="Admin,ProjectManager")]
+        public async Task<IActionResult> UnAssignedTickets()
+        {
+            int companyId = User.Identity.GetCompanyId().Value;
+            string vgUserId = _userManager.GetUserId(User);
+
+            List<Ticket> tickets = await _ticketService.GetUnAssignedTicketsAsync(companyId);
+
+            if (User.IsInRole(nameof(Roles.Admin)))
+            {
+                return View(tickets);
+            }
+            else
+            {
+                List<Ticket> pmTickets = new();
+
+                foreach (Ticket ticket in tickets)
+                {
+                    if (await _projectService.IsAssignedProjectManagerAsync(vgUserId, ticket.ProjectId))
+                    {
+                        pmTickets.Add(ticket);
+                    }
+                }
+                return View(pmTickets);
+            }
         }
 
         public async Task<IActionResult> ShowFile(int id)
@@ -321,6 +349,8 @@ namespace Vigilante.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
 
         // GET: Tickets/Restore/5
         public async Task<IActionResult> Restore(int? id)
